@@ -26,4 +26,5 @@ for command in lines:
     amount = int(command_array[1])
     commands[direction](amount)
 
+# Print the solution
 print(h_pos * depth)

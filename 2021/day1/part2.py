@@ -25,6 +25,7 @@ for i, line in enumerate(lines):
 
 end = time.time()
 
+# Print the solution
 print('For Loop Method:', timesDepthIncreased)
 print('Time to calculate:', end - start, 'seconds')
 
@@ -35,6 +36,7 @@ increasedArray = [int(j) > int(i) for i, j in zip(depthArray, depthArray[1:])]
 timesDepthIncreased = len([item for item in increasedArray if item == True])
 end = time.time()
 
+# Print the solution 
 print()
 print('Zip + List Comprehension Method:', timesDepthIncreased)
 print('Time to calculate:', end - start, 'seconds')
