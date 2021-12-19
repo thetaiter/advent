@@ -1,10 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-import os
-import sys
+from helpers import getInput
 
-# Read lines of input file into an array
-lines = []
-with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
-   lines = input.read().splitlines()
-
+# Get Data
+data = getInput()

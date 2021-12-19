@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-import os
-import sys
+# For timing the different methods
 import time
 
-# Read lines of input file into an array
-lines = []
-with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
-   lines = input.read().splitlines()
+# Import helper functions included in this repository
+from helpers import getInput
+
+# Get Data
+data = getInput()
 
 # Initialize variables
 timesDepthIncreased = 0
@@ -15,10 +15,10 @@ timesDepthIncreased = 0
 # For Loop Method
 start = time.time()
 
-for i, line in enumerate(lines):
+for i, depth in enumerate(data):
     if i > 0:
-        previousDepth = int(lines[i-1])
-        currentDepth = int(line)
+        previousDepth = int(data[i-1])
+        currentDepth = int(depth)
 
         if currentDepth > previousDepth:
             timesDepthIncreased += 1
@@ -31,7 +31,7 @@ print('Time to calculate:', end - start, 'seconds')
 
 # Zip + List Comprehension Method
 start = time.time()
-increasedArray = [int(j) > int(i) for i, j in zip(lines, lines[1:])]
+increasedArray = [int(j) > int(i) for i, j in zip(data, data[1:])]
 timesDepthIncreased = len([item for item in increasedArray if item == True])
 end = time.time()
 

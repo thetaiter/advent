@@ -1,21 +1,19 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-import os
-import sys
+# Import helper functions included in this repository
+from helpers import getInput
 
-# Read lines of input file into an array
-lines = []
-with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
-   lines = input.read().splitlines()
+# Get Data
+data = getInput()
 
 # Initialize arrays with length of the first line in the input file
-length = len(lines[0])
+length = len(data[0])
 ones = [0] * length
 zeros = [0] * length
 gamma_rate_binary = ''
 
 # Calculate number of ones and zeroes for each bit
-for line in lines:
+for line in data:
     for i, char in enumerate(line):
         if char == '0':
             zeros[i] += 1

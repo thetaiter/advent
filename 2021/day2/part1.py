@@ -1,12 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-import os
-import sys
+# Import helper functions included in this repository
+from helpers import getInput
 
-# Read lines of input file into an array
-lines = []
-with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
-    lines = input.read().splitlines()
+# Get Data
+data = getInput()
 
 # Initialize variables
 h_pos = 0
@@ -20,7 +18,7 @@ commands = {
 }
 
 # Iterate through and execute commands
-for command in lines:
+for command in data:
     command_array = command.split(' ')
     direction = command_array[0]
     amount = int(command_array[1])
