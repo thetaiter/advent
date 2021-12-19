@@ -8,13 +8,13 @@ lines = []
 with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
     lines = input.read().splitlines()
 
-horizontal_position = 0
+h_pos = 0
 depth = 0
 aim = 0
 
 commands = {
     'forward': lambda x: globals().update(
-        horizontal_position = horizontal_position + x,
+        h_pos = h_pos + x,
         depth = depth + (aim * x)
     ),
     'up': lambda x: globals().update(aim = aim - x),
@@ -27,4 +27,4 @@ for command in lines:
     amount = int(command_array[1])
     commands[direction](amount)
 
-print(horizontal_position * depth)
+print(h_pos * depth)
