@@ -9,6 +9,7 @@ lines = []
 with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
    lines = input.read().splitlines()
 
+# Initialize variables
 timesDepthIncreased = 0
 
 # For Loop Method
