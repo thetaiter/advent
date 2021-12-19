@@ -8,10 +8,12 @@ lines = []
 with open(os.path.join(sys.path[0], 'input.txt'), 'r') as input:
     lines = input.read().splitlines()
 
+# Initialize variables
 h_pos = 0
 depth = 0
 aim = 0
 
+# Define commands dictionary using lambda functions
 commands = {
     'forward': lambda x: globals().update(
         h_pos = h_pos + x,
@@ -21,6 +23,7 @@ commands = {
     'down': lambda x: globals().update(aim = aim + x)
 }
 
+# Iterate through and execute commands
 for command in lines:
     command_array = command.split(' ')
     direction = command_array[0]
