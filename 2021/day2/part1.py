@@ -12,9 +12,9 @@ horizontal_position = 0
 depth = 0
 
 commands = {
-    'forward': lambda x: globals().update(horizontal_position=horizontal_position+x),
-    'up': lambda x: globals().update(depth=depth-x),
-    'down': lambda x: globals().update(depth=depth+x)
+    'forward': lambda x: globals().update(horizontal_position = horizontal_position + x),
+    'up': lambda x: globals().update(depth = depth - x),
+    'down': lambda x: globals().update(depth = depth + x)
 }
 
 for command in lines:
@@ -23,4 +23,4 @@ for command in lines:
     amount = int(command_array[1])
     commands[direction](amount)
 
-print(horizontal_position*depth)
+print(horizontal_position * depth)
