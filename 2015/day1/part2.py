@@ -11,10 +11,14 @@ floor = 0
 
 move = {
     '(': lambda: globals().update(floor = floor + 1),
-    ')': lambda: globals().update(floor = floor - 1),   
+    ')': lambda: globals().update(floor = floor - 1) if floor >= 0 else True
 }
 
-for char in data[0]:
-    move[char]()
+position = 0
+for i, char in enumerate(data[0]):
+    if move[char]():
+        position = i
+        break
 
 print(floor)
+print(position)
