@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-from helpers import getProblem, readFile, writeFile, touchFile
+from helpers import *
 
 # Grab arguments from commandline
 try:
@@ -20,7 +20,9 @@ writeFile(f'{year}/day{day}/problem.md', problem)
 
 # Write part1.py from template
 part_template = '\n'.join(readFile('helpers/template.py'))
-writeFile(f'{year}/day{day}/part1.py', part_template)
+part_filename = f'{year}/day{day}/part1.py'
+writeFile(part_filename, part_template)
+makeFileExecutable(part_filename)
 
 # Touch input.txt file (cannot get it automatically... yet)
 touchFile(f'{year}/day{day}/input.txt')

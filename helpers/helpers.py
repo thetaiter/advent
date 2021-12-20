@@ -1,6 +1,7 @@
 # Import required libraries
 import os
 import sys
+import stat
 import fnmatch
 from pathlib import Path
 from urllib import request
@@ -68,3 +69,8 @@ def writeFile(relative_path, content):
 # Touch a file at a relative path
 def touchFile(relative_path):
     Path(relative_path).touch()
+
+# Make a file executable
+def makeFileExecutable(relative_path):
+    st = os.stat(relative_path)
+    os.chmod(relative_path, st.st_mode | stat.S_IEXEC)
