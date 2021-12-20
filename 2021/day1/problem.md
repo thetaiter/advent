@@ -1,4 +1,5 @@
 # --- Day 1: Sonar Sweep ---
+
 ## --- Part One ---
 
 You're minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!
@@ -12,7 +13,8 @@ Collect `stars` by solving puzzles. Two puzzles will be made available on each d
 As the submarine drops below the surface of the ocean, it automatically performs a sonar sweep of the nearby sea floor. On a small screen, the sonar sweep report (your puzzle input) appears: each line is a measurement of the sea floor depth as the sweep looks further and further away from the submarine.
 
 For example, suppose you had the following report:
-```
+
+```text
 199
 200
 208
@@ -30,7 +32,8 @@ This report indicates that, scanning outward from the submarine, the sonar sweep
 The first order of business is to figure out how quickly the depth increases, just so you know what you're dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.
 
 To do this, count the number of times a depth measurement increases from the previous measurement. (There is no measurement before the first measurement.) In the example above, the changes are as follows:
-```
+
+```text
 199 (N/A - no previous measurement)
 200 (increased)
 208 (increased)
@@ -54,7 +57,8 @@ Your puzzle answer was `1446`.
 Considering every single measurement isn't as useful as you expected: there's just too much noise in the data.
 
 Instead, consider `sums` of a `three-measurement sliding window`. Again considering the above example:
-```
+
+```text
 199  A      
 200  A B    
 208  A B C  
@@ -72,7 +76,8 @@ Start by comparing the first and second three-measurement windows. The measureme
 Your goal now is to count the number of times the sum of measurements in this sliding window increases from the previous sum. So, compare `A` with `B`, then compare `B` with `C`, then `C` with `D`, and so on. Stop when there aren't enough measurements left to create a new three-measurement sum.
 
 In the above example, the sum of each three-measurement window is as follows:
-```
+
+```text
 A: 607 (N/A - no previous sum)
 B: 618 (increased)
 C: 618 (no change)

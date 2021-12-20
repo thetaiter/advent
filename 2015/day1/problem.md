@@ -1,4 +1,5 @@
 # --- Day 1: Not Quite Lisp ---
+
 ## --- Part One ---
 
 Santa was hoping for a white Christmas, but his weather machine's "snow" function is powered by `stars`, and he's fresh out! To save Christmas, he needs you to collect `fifty` `stars` by `December 25th`.
@@ -14,7 +15,8 @@ An opening parenthesis, `(`, means he should go up one `floor`, and a closing pa
 The apartment building is very tall, and the basement is very deep; he will never find the top or bottom `floors`.
 
 For example:
-```
+
+```text
 (()) and ()() both result in floor 0.
 ((( and (()(()( both result in floor 3.
 ))((((( also results in floor 3.
@@ -32,8 +34,8 @@ Now, given the same instructions, find the position of the first character that 
 
 For example:
 
-  - ) causes him to enter the basement at character position `1`.
-  - ()()) causes him to enter the basement at character position `5`.
+- ) causes him to enter the basement at character position `1`.
+- ()()) causes him to enter the basement at character position `5`.
 
 What is the position of the character that causes Santa to first enter the basement?
 

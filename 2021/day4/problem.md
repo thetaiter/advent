@@ -1,4 +1,5 @@
 # --- Day 4: Giant Squid ---
+
 ## --- Part One ---
 
 You're already almost `1.5km` (almost a mile) below the surface of the ocean, already so deep that you can't see any sunlight. What you can see, however, is a giant squid that has attached itself to the outside of your submarine.
@@ -10,7 +11,8 @@ Bingo is played on a set of boards each consisting of a `5x5` grid of numbers. N
 The submarine has a bingo subsystem to help passengers (currently, you and the giant squid) pass the time. It automatically generates a random order in which to draw numbers and a random set of boards (your puzzle input). For example:
 
 `7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1`
-```
+
+```text
 22 13 17 11  0
  8  2 23  4 24
 21  9 14 16  7
@@ -31,7 +33,8 @@ The submarine has a bingo subsystem to help passengers (currently, you and the g
 ```
 
 After the first five numbers are drawn (`7`, `4`, `9`, `5`, and `11`), there are no winners, but the boards are marked as follows (shown here adjacent to each other to save space):
-```
+
+```text
 22 13 17 11  0         3 15  0  2 22        14 21 17 24  4
  8  2 23  4 24         9 18 13 17  5        10 16 15  9 19
 21  9 14 16  7        19  8  7 25 23        18  8 23 26 20
@@ -40,7 +43,8 @@ After the first five numbers are drawn (`7`, `4`, `9`, `5`, and `11`), there are
 ```
 
 After the next six numbers are drawn (17, 23, 2, 0, 14, and 21), there are still no winners:
-```
+
+```text
 22 13 17 11  0         3 15  0  2 22        14 21 17 24  4
  8  2 23  4 24         9 18 13 17  5        10 16 15  9 19
 21  9 14 16  7        19  8  7 25 23        18  8 23 26 20
@@ -49,7 +53,8 @@ After the next six numbers are drawn (17, 23, 2, 0, 14, and 21), there are still
 ```
 
 Finally, 24 is drawn:
-```
+
+```text
 22 13 17 11  0         3 15  0  2 22        14 21 17 24  4
  8  2 23  4 24         9 18 13 17  5        10 16 15  9 19
 21  9 14 16  7        19  8  7 25 23        18  8 23 26 20

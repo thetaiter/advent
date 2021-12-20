@@ -24,10 +24,10 @@ def getProblem(year=2015, day=1):
     matching = fnmatch.filter(text_array, '## *')
     first_line = text_array.index(matching[0])
     text_array = text_array[first_line:-7]
-    text_array.insert(1,'## --- Part One ---')
+    text_array.insert(1,'\n## --- Part One ---')
     text_array.append('\nYour puzzle answer was ______.\n')
     text_array.append('\n## --- Part Two ---\n\n\nYour puzzle answer was ______.\n')
-    problem = '\n'.join(text_array).replace('\-', '-').replace('*', '-').replace('## --- Day', '# --- Day')
+    problem = '\n'.join(text_array).replace('\-', '-').replace('  *', '-').replace('## --- Day', '# --- Day')
 
     return problem
 
