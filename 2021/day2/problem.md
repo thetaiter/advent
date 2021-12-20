@@ -1,5 +1,6 @@
 # --- Day 2: Dive! ---
 ## --- Part One ---
+
 Now, you need to figure out how to pilot this thing.
 
 It seems like the submarine can take a series of commands like `forward 1`, `down 2`, or `up 3`:
@@ -36,6 +37,7 @@ Calculate the `horizontal position` and `depth` you would have after following t
 Your puzzle answer was `1524750`.
 
 ## --- Part Two ---
+
 Based on your calculations, the planned course doesn't seem to make any sense. You find the submarine manual and discover that the process is actually slightly more complicated.
 
 In addition to `horizontal position` and `depth`, you'll also need to track a third value, `aim`, which also starts at `0`. The commands also mean something entirely different than you first thought:
