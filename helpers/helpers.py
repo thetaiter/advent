@@ -9,8 +9,7 @@ from html2text import html2text
 
 # Read and return content of input file as a list (unless there is onyly one line)
 def getInput():
-    data = readFile('input.txt')
-    return data[0] if len(data) == 1 else data
+    return readFile('input.txt')
 
 # Automatically get the problem text from adventofcode.com
 def getProblem(year=2015, day=1):
@@ -35,14 +34,15 @@ def getProblem(year=2015, day=1):
 
 # Read a file  at a relative path into a list
 def readFile(relative_path):
+    content = None
     try:
-        with open(os.path.join(sys.path[0], relative_path), 'r') as input:
-            lines = input.read().splitlines()
+        with open(os.path.join(sys.path[0], relative_path), 'r') as f:
+            content = f.read().splitlines()
     except:
         print(f'Could not read file {relative_path}', file=sys.stderr)
         exit(1)
 
-    return lines
+    return content[0] if content and len(content) == 1 else content
 
 # Write content to a file at a relative path
 def writeFile(relative_path, content):
@@ -60,8 +60,8 @@ def writeFile(relative_path, content):
         os.makedirs(filedir)
 
     try:
-        with open(filepath, 'w') as file:
-            file.write(content)
+        with open(filepath, 'w') as f:
+            f.write(content)
     except:
         print(f'Could not write file {filepath}', file=sys.stderr)
         exit(1)
