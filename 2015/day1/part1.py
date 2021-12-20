@@ -14,7 +14,7 @@ move = {
     ')': lambda: globals().update(floor = floor - 1),   
 }
 
-for char in data[0]:
+for char in data:
     move[char]()
 
 print(floor)

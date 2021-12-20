@@ -15,7 +15,7 @@ move = {
 }
 
 position = 0
-for i, char in enumerate(data[0]):
+for i, char in enumerate(data):
     if move[char]():
         position = i
         break

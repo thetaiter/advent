@@ -6,9 +6,10 @@ from pathlib import Path
 from urllib import request
 from html2text import html2text
 
-# Read and return content of input file as a list
+# Read and return content of input file as a list (unless there is onyly one line)
 def getInput():
-    return readFile('input.txt')
+    data = readFile('input.txt')
+    return data[0] if len(data) == 1 else data
 
 # Automatically get the problem text from adventofcode.com
 def getProblem(year=2015, day=1):
