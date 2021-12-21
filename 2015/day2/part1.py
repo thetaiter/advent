@@ -15,4 +15,5 @@ for box in data:
     extra = min(sides)
     total_surface_area += surface_area + extra
 
+# Print the solution
 print(total_surface_area)

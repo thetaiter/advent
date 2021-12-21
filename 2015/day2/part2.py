@@ -5,14 +5,16 @@ from helpers import getInput
 
 # Get Data
 data = getInput()
-data = [[int(side) for side in box.split('x')] for box in data]
+data = [box.split('x') for box in data]
 
-# Calculate surface area
-total_surface_area = 0
+# Calculate feet of ribbon
+feet_of_ribbon = 0
 for box in data:
-    sides = [x * y for x, y in zip(box, [box[1], box[2], box[0]])]
-    surface_area = 2 * sum(sides)
-    extra = min(sides)
-    total_surface_area += surface_area + extra
+    bow = eval('*'.join(box))
+    box = [int(side) for side in box]
+    box.remove(max(box))
+    wrap = 2 * sum(box)
+    feet_of_ribbon += wrap + bow
 
-print(total_surface_area)
+# Print the solution
+print(feet_of_ribbon)
