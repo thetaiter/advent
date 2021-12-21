@@ -16,13 +16,14 @@ except:
 
 # Write problem file with first part of the problem
 problem = getProblem(year, day)
-writeFile(f'{year}/day{day}/problem.md', problem)
+problem_dir = f'{year}/day{day}'
+writeFile(f'{problem_dir}/problem.md', problem)
 
 # Write part1.py from template
 part_template = readFile('helpers/template.py', string=True)
-part_filename = f'{year}/day{day}/part1.py'
+part_filename = f'{problem_dir}/part1.py'
 writeFile(part_filename, part_template)
 makeFileExecutable(part_filename)
 
 # Touch input.txt file (cannot get it automatically... yet)
-touchFile(f'{year}/day{day}/input.txt')
+touchFile(f'{problem_dir}/input.txt')
