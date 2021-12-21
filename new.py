@@ -19,7 +19,7 @@ problem = getProblem(year, day)
 writeFile(f'{year}/day{day}/problem.md', problem)
 
 # Write part1.py from template
-part_template = '\n'.join(readFile('helpers/template.py'))
+part_template = readFile('helpers/template.py', string=True)
 part_filename = f'{year}/day{day}/part1.py'
 writeFile(part_filename, part_template)
 makeFileExecutable(part_filename)

@@ -26,23 +26,28 @@ def getProblem(year=2015, day=1):
     first_line = text_array.index(matching[0])
     text_array = text_array[first_line:-7]
     text_array.insert(1,'\n## --- Part One ---')
-    text_array.append('\nYour puzzle answer was ______.\n')
-    text_array.append('\n## --- Part Two ---\n\n\nYour puzzle answer was ______.\n')
+    text_array.append('\nYour puzzle answer was ______.')
+    text_array.append('\n## --- Part Two ---\n\n\n\nYour puzzle answer was ______.\n')
     problem = '\n'.join(text_array).replace('\-', '-').replace('  *', '-').replace('## --- Day', '# --- Day')
 
     return problem
 
 # Read a file  at a relative path into a list
-def readFile(relative_path):
+def readFile(relative_path, string=False):
     content = None
+
     try:
         with open(os.path.join(sys.path[0], relative_path), 'r') as f:
-            content = f.read().splitlines()
+            content = f.read()
     except:
         print(f'Could not read file {relative_path}', file=sys.stderr)
         exit(1)
 
-    return content[0] if content and len(content) == 1 else content
+    if string:
+        return content
+    else:
+        content = content.splitlines()
+        return content[0] if len(content) == 1 else content
 
 # Write content to a file at a relative path
 def writeFile(relative_path, content):
