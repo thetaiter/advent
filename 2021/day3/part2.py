@@ -3,6 +3,9 @@
 # Import helper functions included in this repository
 from helpers import getInput
 
+# Get Data
+data = getInput()
+
 # Recursive function to calculate oxygen generator rating
 def calculate_rating(binaryData, rating, bit=0):
     # Completion criteria has been met, return the final value
@@ -35,9 +38,6 @@ def calculate_rating(binaryData, rating, bit=0):
     
     # Recurse by calling self with new data, returning the result up the call stack
     return calculate_rating(newData[rating], rating, bit+1)
-
-# Get Data
-data = getInput()
 
 # Calculate oxygen generator and cos scrubber ratings
 oxygen_rating_binary = calculate_rating(data, 'oxygen')
