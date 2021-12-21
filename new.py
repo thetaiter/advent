@@ -14,7 +14,7 @@ try:
 except:
     day = 1
 
-# Write problem file with first part of the problem
+# Write problem file with first part of the problem (2nd part requires authentication)
 problem = getProblem(year, day)
 problem_dir = f'{year}/day{day}'
 writeFile(f'{problem_dir}/problem.md', problem)
@@ -25,5 +25,5 @@ part_filename = f'{problem_dir}/part1.py'
 writeFile(part_filename, part_template)
 makeFileExecutable(part_filename)
 
-# Touch input.txt file (cannot get it automatically... yet)
+# Touch input.txt file (cannot get it automatically... yet. It requires authentication)
 touchFile(f'{problem_dir}/input.txt')
