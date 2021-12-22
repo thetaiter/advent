@@ -8,8 +8,8 @@ from urllib import request
 from html2text import html2text
 
 # Read and return content of input file as a list (unless there is onyly one line)
-def getInput():
-    return readFile('input.txt')
+def getInput(return_type=list):
+    return readFile('input.txt', return_type)
 
 # Automatically get the problem text from adventofcode.com
 def getProblem(year=2015, day=1):
@@ -33,7 +33,7 @@ def getProblem(year=2015, day=1):
     return problem
 
 # Read a file  at a relative path into a list
-def readFile(relative_path, string=False):
+def readFile(relative_path, return_type=list):
     content = None
 
     try:
@@ -43,11 +43,14 @@ def readFile(relative_path, string=False):
         print(f'Could not read file {relative_path}', file=sys.stderr)
         exit(1)
 
-    if string:
+    if return_type == str:
         return content
-    else:
+    elif return_type == list:
         content = content.splitlines()
-        return content[0] if len(content) == 1 else content
+        return list(content[0]) if len(content) == 1 else content
+    else:
+        print(f'Unsupported return type for readFile method: {return_type}', file=sys.stderr)
+        exit(1)
 
 # Write content to a file at a relative path
 def writeFile(relative_path, content):
