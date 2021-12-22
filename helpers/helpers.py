@@ -7,7 +7,7 @@ from pathlib import Path
 from urllib import request
 from html2text import html2text
 
-# Read and return content of input file as a list (unless there is onyly one line)
+# Read and return content of input file as a list or a string (list is default)
 def getInput(return_type=list):
     return readFile('input.txt', return_type)
 
@@ -32,15 +32,15 @@ def getProblem(year=2015, day=1):
 
     return problem
 
-# Read a file  at a relative path into a list
-def readFile(relative_path, return_type=list):
+# Read a file into a list or a string (list is default)
+def readFile(filepath, return_type=list):
     content = None
 
     try:
-        with open(os.path.join(sys.path[0], relative_path), 'r') as f:
+        with open(os.path.join(sys.path[0], filepath), 'r') as f:
             content = f.read()
     except:
-        print(f'Could not read file {relative_path}', file=sys.stderr)
+        print(f'Could not read file {filepath}', file=sys.stderr)
         exit(1)
 
     if return_type == str:
@@ -52,12 +52,12 @@ def readFile(relative_path, return_type=list):
         print(f'Unsupported return type for readFile method: {return_type}', file=sys.stderr)
         exit(1)
 
-# Write content to a file at a relative path
-def writeFile(relative_path, content):
-    filepath = os.path.join(sys.path[0], relative_path)
+# Write content to a file and optionally make it executable
+def writeFile(filepath, content, executable=False):
+    filepath = os.path.join(sys.path[0], filepath)
 
     if os.path.exists(filepath):
-        response = input(f'File {relative_path} already exists. Overwrite? (y/n) [n]: ')
+        response = input(f'File {filepath} already exists. Overwrite? (y/n) [n]: ')
         if response.lower() != 'y':
             print('Aborting.', file=sys.stderr)
             exit(1)
@@ -74,11 +74,17 @@ def writeFile(relative_path, content):
         print(f'Could not write file {filepath}', file=sys.stderr)
         exit(1)
 
-# Touch a file at a relative path
-def touchFile(relative_path):
-    Path(relative_path).touch()
+    if executable:
+        makeFileExecutable(filepath)
+
+# Touch a file
+def touchFile(filepath):
+    Path(filepath).touch()
 
 # Make a file executable
-def makeFileExecutable(relative_path):
-    st = os.stat(relative_path)
-    os.chmod(relative_path, st.st_mode | stat.S_IEXEC)
+def makeFileExecutable(filepath):
+    try:
+        st = os.stat(filepath)
+        os.chmod(filepath, st.st_mode | stat.S_IEXEC)
+    except:
+        print(f'Unable to change permissions of file {filepath}')
