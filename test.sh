@@ -24,7 +24,7 @@ function run_test() {
         failed_tests=true
     else
         local answer
-        local answers=( $(grep 'Your puzzle answer was' "$(dirname "${part}")/problem.md" | cut -d' ' -f5 | cut -d\` -f2) )
+        local answers=( $(grep 'Your puzzle answer was' "$(dirname "${part}")/README.md" | cut -d' ' -f5 | cut -d\` -f2) )
         result="$(echo "${result}" | head -n 1)"
 
         if [[ "${part}" == *'part1'* ]]

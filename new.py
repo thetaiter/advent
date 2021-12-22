@@ -17,7 +17,7 @@ except:
 # Write problem file with first part of the problem (2nd part requires authentication)
 problem = getProblem(year, day)
 problem_dir = f'{year}/day{day}'
-writeFile(f'{problem_dir}/problem.md', problem)
+writeFile(f'{problem_dir}/README.md', problem)
 
 # Write part1.py from template
 part_template = readFile('helpers/template.py', return_type=str)
