@@ -21,7 +21,7 @@ For example:
 All numbers in the elves' list are in feet. How many total _square feet of
 wrapping paper_ should they order?
 
-Your puzzle answer was 1598415.
+Your puzzle answer was `1598415`.
 
 ## --- Part Two ---
 
@@ -35,4 +35,4 @@ A present with dimensions `2x3x4` requires `2+2+3+3 = 10` feet of ribbon to wrap
 A present with dimensions `1x1x10` requires `1+1+1+1 = 4` feet of ribbon to wrap the present plus `1*1*10 = 10` feet of ribbon for the bow, for a total of `14` feet.
 How many total feet of ribbon should they order?
 
-Your puzzle answer was 3812909.
+Your puzzle answer was `3812909`.

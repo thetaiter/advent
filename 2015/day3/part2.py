@@ -4,7 +4,7 @@
 from helpers import getInput
 
 # Get Data
-data = getInput(list)
+data = getInput()
 
 # Define movement dictionary
 move = {

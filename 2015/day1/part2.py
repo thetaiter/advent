@@ -20,5 +20,4 @@ for i, char in enumerate(data):
         position = i
         break
 
-print(floor)
 print(position)
