@@ -63,7 +63,6 @@ function run_test() {
     local part="${1}"
     local test_failed=false
     local test_skipped=false
-    local test_errored=false
     local failure_message=''
     local skipped_message=''
 
@@ -134,7 +133,9 @@ function run_tests() {
     done
 
     info "\nTests completed successfully\n"
+}
 
+function print_results() {
     local total_tests="$((num_failed + num_skipped + num_passed))"
     local percent_failed="$(echo "${num_failed}/${total_tests}*100" | bc -l)"
     local percent_skipped="$(echo "${num_skipped}/${total_tests}*100" | bc -l)"
@@ -147,3 +148,4 @@ function run_tests() {
 }
 
 run_tests
+print_results
