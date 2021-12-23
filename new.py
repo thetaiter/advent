@@ -4,7 +4,7 @@ import sys
 from datetime import date
 from helpers import *
 
-description = 'Generate the directories and files for a new Advent of Code problem'
+description = 'Generate the directories and files for a new Advent of Code problem automatically'
 usage = f'''Usage: {sys.argv[0]} [year] [day]
 
 [year] Must be a 4 digit integer between 2015 and the current year (inclusive), default is 2015
@@ -31,11 +31,13 @@ for index, arg in enumerate(sys.argv[1:]):
 year = problem_date[0]
 day = problem_date[1]
 
+# Validate year
 if not (2015 <= year <= date.today().year):
     print(f'Invalid year: {year}', file=sys.stderr)
     print(usage, file=sys.stderr)
     exit(1)
 
+# Validate day
 if not (1 <= day <= (date.today().day if year == date.today().year else 25)):
     print(f'Invalid day: {day}', file=sys.stderr)
     print(usage, file=sys.stderr)

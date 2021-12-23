@@ -16,4 +16,8 @@ And then you can run the challenge solutions like this:\
 OR\
 `python3 ./<year>/day<#>/part<#>.py`
 
+You can run all challenge solutions and automatically compare the results with the answers defined in the relevant `README.md` files by running `./test.sh`. This script assumes that the first line printed from each challenge solution is the answer for that particular challenge.
+
+You can easily set up a new challenge problem directory and files using `new.py`. Try `./new.py --help` for more information about how to use the script.
+
 You can have your Conda environment change to `advent` automatically when you `cd` into the directory where you have this repository by using `direnv`. After installing `direnv` [here](https://direnv.net/docs/installation.html), you can follow the instructions [here](https://medium.com/@manishdixit1986/auto-switch-conda-env-per-directory-using-conda-direnv-in-linux-13c912da6520) to set that up.
