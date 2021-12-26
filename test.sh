@@ -16,6 +16,7 @@ parts=( $(find . -type f -name 'part*.py' | sort) )
 function print() {
     local level="${1}"
     local text="${2}"
+    local fd=1
     local newline_char="\n"
 
     if [ "${NEWLINE}" = false ]
@@ -23,12 +24,12 @@ function print() {
         newline_char=''
     fi
 
-    if [[ "${level}" = 'INFO' ]]
+    if [[ "${level}" != 'INFO' ]]
     then
-        printf -- "[%s] %-7s %s${newline_char}" "$(date +"%Y-%m-%d %H:%M:%S")" "(${level})" "${text}"
-    else
-        printf -- "[%s] %-7s %s${newline_char}" "$(date +"%Y-%m-%d %H:%M:%S")" "(${level})" "${text}" >&2
+        fd=2
     fi
+
+    printf -- "[%s] %-7s %s${newline_char}" "$(date +"%Y-%m-%d %H:%M:%S")" "(${level})" "${text}" >&${fd}
 }
 
 function log() {
@@ -52,7 +53,7 @@ function info() {
 }
 
 function warn() {
-    log 'WARN' "${1}"
+    log 'WARN' "${1}" 3
 }
 
 function error() {
@@ -111,12 +112,12 @@ function run_test() {
 
     if [ "${test_failed}" = true ]
     then
-        printf -- "${RED}Failed :(${NO_COLOR}\n" >&2
+        printf -- "${RED}Failed :(${NO_COLOR}\n"
         error "${failure_message}"
         num_failed=$((num_failed+1))
     elif [ "${test_skipped}" = true ]
     then
-        printf -- "${YELLOW}Skipped :|${NO_COLOR}\n" >&2
+        printf -- "${YELLOW}Skipped :|${NO_COLOR}\n"
         warn "${skipped_message}"
         num_skipped=$((num_skipped+1))
     else
