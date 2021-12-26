@@ -158,3 +158,8 @@ function print_results() {
 
 run_tests
 print_results
+
+if [ "${num_failed}" -ne 0 ]
+then
+    exit 1
+fi
