@@ -26,7 +26,10 @@ For example:
 
 To what `floor` do the instructions take Santa?
 
-Your puzzle answer was `138`.
+<details>
+    <summary>Reveal the answer!</summary>
+    Your puzzle answer was <code>138</code>.
+</details>
 
 ## --- Part Two ---
 
@@ -39,4 +42,7 @@ For example:
 
 What is the position of the character that causes Santa to first enter the basement?
 
-Your puzzle answer was `1771`.
+<details>
+    <summary>Reveal the answer!</summary>
+    Your puzzle answer was <code>1771</code>.
+</details>

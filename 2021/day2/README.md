@@ -36,7 +36,10 @@ After following these instructions, you would have a `horizontal position` of `1
 
 Calculate the `horizontal position` and `depth` you would have after following the planned course. What do you get if you multiply your final `horizontal position` by your final `depth`?
 
-Your puzzle answer was `1524750`.
+<details>
+    <summary>Reveal the answer!</summary>
+    Your puzzle answer was <code>1524750</code>.
+</details>
 
 ## --- Part Two ---
 
@@ -65,4 +68,7 @@ After following these new instructions, you would have a `horizontal position` o
 
 Using this new interpretation of the commands, calculate the `horizontal position` and `depth` you would have after following the planned course. What do you get if you multiply your final `horizontal position` by your final `depth`?
 
-Your puzzle answer was `1592426537`.
+<details>
+    <summary>Reveal the answer!</summary>
+    Your puzzle answer was <code>1592426537</code>.
+</details>

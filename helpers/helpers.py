@@ -1,4 +1,5 @@
 # Import required libraries
+from abc import abstractproperty
 import os
 import sys
 import stat
@@ -26,8 +27,15 @@ def getProblem(year=2015, day=1):
     first_line = text_array.index(matching[0])
     text_array = text_array[first_line:-7]
     text_array.insert(1,'\n## --- Part One ---')
-    text_array.append('\nYour puzzle answer was ______.')
-    text_array.append('\n## --- Part Two ---\n\n\n\nYour puzzle answer was ______.\n')
+    text_array.append('\n<details>')
+    text_array.append('    <summary>Reveal the answer!</summary>')
+    text_array.append('    Your puzzle answer was <code>______</code>.')
+    text_array.append('</details>')
+    text_array.append('\n## --- Part Two ---')
+    text_array.append('\n\n\n<details>')
+    text_array.append('    <summary>Reveal the answer!</summary>')
+    text_array.append('    Your puzzle answer was <code>______</code>.')
+    text_array.append('</details>\n')
     problem = '\n'.join(text_array).replace('\-', '-').replace('  *', '-').replace('## --- Day', '# --- Day')
 
     return problem
