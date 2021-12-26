@@ -93,6 +93,7 @@ function run_test() {
             result="$(python3 "${part}" 2>&1)"
             local err_code="${?}"
             set -e
+
             if [ "${err_code}" -ne 0 ]
             then
                 failure_message="${result}"
@@ -115,7 +116,7 @@ function run_test() {
         num_failed=$((num_failed+1))
     elif [ "${test_skipped}" = true ]
     then
-        printf -- "${YELLOW}Skipped :|${NO_COLOR}\n"
+        printf -- "${YELLOW}Skipped :|${NO_COLOR}\n" >&2
         warn "${skipped_message}"
         num_skipped=$((num_skipped+1))
     else
