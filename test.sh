@@ -75,7 +75,14 @@ function run_test() {
         test_skipped=true
     else
         local answer
-        local answers=( $(grep 'Your puzzle answer was' "$(dirname "${part}")/README.md" | awk 'NF>1{print $NF}' | cut -d\` -f2) )
+        local answers=(
+            $(
+                grep 'Your puzzle answer was <code>' "$(dirname "${part}")/README.md" | \
+                awk 'NF>1{print $NF}' | \
+                sed 's/<[^>]*>//g' | \
+                cut -d\. -f1
+            )
+        )
 
         if [[ "${part}" == *'part1'* ]]
         then
