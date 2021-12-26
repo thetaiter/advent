@@ -4,7 +4,7 @@
 from helpers import getInput
 
 # Get Data
-data = getInput()
+data = getInput(str)
 
 # Define movement dictionary
 move = {
@@ -16,16 +16,25 @@ move = {
 
 # Initialize variables
 houses = 1
-position = [0,0]
-positions = [[0,0]]
+santa_position = [0,0]
+robo_position = [0, 0]
+positions = [[0, 0]]
 
 # Loop through directions
-for direction in data:
-    position = move[direction](position)
+for index, direction in enumerate(data):
+    # Check if index is even
+    if index % 2 == 0:
+        santa_position = move[direction](santa_position)
 
-    if position not in positions:
-        positions.append(position)
-        houses += 1
+        if santa_position not in positions:
+            positions.append(santa_position)
+            houses += 1
+    else:
+        robo_position = move[direction](robo_position)
+
+        if robo_position not in positions:
+            positions.append(robo_position)
+            houses += 1
 
 # Print the solution
 print(houses)
