@@ -75,6 +75,8 @@ To guarantee victory against the giant squid, figure out which board will win fi
 
 ## --- Part Two ---
 
+
+
 <details>
     <summary>Reveal the answer!</summary>
     Your puzzle answer was <code>______</code>.

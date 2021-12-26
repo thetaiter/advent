@@ -26,6 +26,8 @@ For example:
 
 ## --- Part Two ---
 
+
+
 <details>
     <summary>Reveal the answer!</summary>
     Your puzzle answer was <code>______</code>.
