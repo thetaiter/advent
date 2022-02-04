@@ -53,7 +53,7 @@ function info() {
 }
 
 function warn() {
-    log 'WARN' "${1}" 3
+    log 'WARN' "${1}"
 }
 
 function error() {
