@@ -3,6 +3,7 @@ from abc import abstractproperty
 import os
 import sys
 import stat
+import time
 import fnmatch
 from pathlib import Path
 from urllib import request
@@ -96,3 +97,13 @@ def makeFileExecutable(filepath):
         os.chmod(filepath, st.st_mode | stat.S_IEXEC)
     except:
         print(f'Unable to change permissions of file {filepath}')
+
+# Timer decorator function
+def timer(func):
+    def inner():
+        start = time.time()
+        func()
+        end = time.time()
+        print('Time to run:', end - start, 'seconds')
+
+    return inner
