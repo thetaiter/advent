@@ -1,24 +1,21 @@
 #!/usr/bin/env python
 
-# For timing the different methods
-import time
-
 # Import helper functions included in this repository
-from helpers import getInput
+from helpers import getInput, timer
 
 # Get Data
 data = getInput()
 
-# Initialize variables
-timesDepthIncreased = 0
-
 # Zip + List Comprehension Method
-start = time.time()
-depthArray = [int(j) + int(i) + int(k) for i, j, k in zip(data, data[1:], data[2:])]
-increasedArray = [int(j) > int(i) for i, j in zip(depthArray, depthArray[1:])]
-timesDepthIncreased = len([item for item in increasedArray if item == True])
-end = time.time()
+@timer
+def getTimesDepthIncreased():
+    timesDepthIncreased = 0
 
-# Print the solution for the Zip + List Comprehension Method
-print(timesDepthIncreased)
-print('Time to calculate:', end - start, 'seconds')
+    depthArray = [int(j) + int(i) + int(k) for i, j, k in zip(data, data[1:], data[2:])]
+    increasedArray = [int(j) > int(i) for i, j in zip(depthArray, depthArray[1:])]
+    timesDepthIncreased = len([item for item in increasedArray if item == True])
+
+    print(timesDepthIncreased)
+
+# Run the solution for the Zip + List Comprehension Method
+getTimesDepthIncreased()
