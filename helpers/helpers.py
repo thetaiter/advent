@@ -1,5 +1,4 @@
 # Import required libraries
-from abc import abstractproperty
 import os
 import sys
 import stat
