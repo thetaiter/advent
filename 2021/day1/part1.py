@@ -7,7 +7,8 @@ from helpers import getInput, timer, compare
 # Get Data
 data = getInput()
 
-@timer('For Loop Method')
+# Function to run the For Loop solution using the timer decorator
+@timer('For Loop')
 def getTimesDepthIncreasedWithForLoop():
     timesDepthIncreased = 0
 
@@ -22,7 +23,8 @@ def getTimesDepthIncreasedWithForLoop():
     print(f"{timesDepthIncreased}")
     return timesDepthIncreased
 
-@timer('Zip List Comprehension Method')
+# Function to run the Zip List Comprehension solution using the timer decorator
+@timer('Zip List Comprehension')
 def getTimesDepthIncreasedWithZipListComprehension():
     timesDepthIncreased = 0
 

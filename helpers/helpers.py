@@ -98,42 +98,65 @@ def makeFileExecutable(filepath):
     except:
         print(f'Unable to change permissions of file {filepath}')
 
-# Timer decorator class with arguments (name)
-class timer(object):
-    def __init__(self, name):
-        self.name = name
-
-    def __call__(self, func):
-        def inner():
-            print(f"{Style.BRIGHT}{Fore.LIGHTBLUE_EX}{self.name}{Style.RESET_ALL}")
-
-            start = time.time()
-            return_value = func()
-            end = time.time()
-
-            time_to_run = end - start
-            print(time_to_run, 'seconds')
+# Decorator function for timing a given function
+def timer(*args, **kwargs):
+    def inner(func):
+        def wrapper(*args, **kwargs):
+            if name:
+                print(f"{Style.BRIGHT}{Fore.LIGHTBLUE_EX}{name}{Style.RESET_ALL}")
 
             return {
-                "name": self.name,
-                "return_value": return_value,
-                "time_to_run": time_to_run
+                'name': name,
+                **timed_run(func, *args, **kwargs)
             }
 
+        return wrapper
+
+    if len(args) == 1 and callable(args[0]):
+        name = None
+        return inner(args[0])
+    else:
+        name = args[0] if len(args) > 0 else kwargs['name'] if 'name' in kwargs.keys() else None
         return inner
 
-# Compare two solution answers and runtimes
+# Function to get the runtime of another function
+def timed_run(func, *args, **kwargs):
+    start = time.time()
+    return_value = func(*args, **kwargs)
+    end = time.time()
+    time_to_run = end - start
+
+    print(time_to_run, 'seconds')
+
+    return {
+        'return_value': return_value,
+        'time_to_run': time_to_run
+    }
+
+# Decorator to compare multiple solution answers and runtimes
 def compare(func):
     def inner():
         solutions = func()
 
-        fastest_solution = min(solutions, key=lambda s: s["time_to_run"])
+        if isinstance(solutions, list):
+            solutions_match = len(set(solution['return_value'] for solution in solutions)) == 1
+            match_text = f'{Fore.GREEN}match{Style.RESET_ALL}!'
+            do_not_match_text = f'{Fore.RED}do not match{Style.RESET_ALL}.'
 
-        if len(set(solution["return_value"] for solution in solutions)) == 1:
-            print(f"Solutions {Fore.GREEN}match{Style.RESET_ALL}!")
+            if solutions_match:
+                print(f'Solutions {match_text}')
+            else:
+                print(f'Solutions {do_not_match_text}')
+                return None
+
+            fastest_solution = min(solutions, key=lambda s: s['time_to_run'])
+            fastest_solution_name = f'{Style.BRIGHT}{Fore.LIGHTBLUE_EX}{fastest_solution["name"]}{Style.RESET_ALL}'
+            verbiage = 'faster' if len(solutions) == 2 else 'the fastest'
+
+            print(f'The {fastest_solution_name} solution was {verbiage}.')
         else:
-            print(f"Solutions {Fore.RED}do not match{Style.RESET_ALL}.")
+            fastest_solution = solutions
 
-        print(f"The {Style.BRIGHT}{Fore.LIGHTBLUE_EX}{fastest_solution['name']}{Style.RESET_ALL} solution was {'faster' if len(solutions) == 2 else 'the fastest'}.")
+        return fastest_solution
 
     return inner
