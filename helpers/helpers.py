@@ -49,7 +49,7 @@ def readFile(filepath, return_type=list):
         with open(os.path.join(sys.path[0], filepath), 'r') as f:
             content = f.read()
     except:
-        print(f'Could not read file {filepath}', file=sys.stderr)
+        print(f'Error: Could not read file {filepath}', file=sys.stderr)
         exit(1)
 
     if return_type == str:
@@ -58,7 +58,7 @@ def readFile(filepath, return_type=list):
         content = content.splitlines()
         return list(content[0]) if len(content) == 1 else content
     else:
-        print(f'Unsupported return type for readFile method: {return_type}', file=sys.stderr)
+        print(f'Error: Unsupported return type for readFile method: {return_type}', file=sys.stderr)
         exit(1)
 
 # Write content to a file and optionally make it executable
@@ -80,7 +80,7 @@ def writeFile(filepath, content, executable=False):
         with open(filepath, 'w') as f:
             f.write(content)
     except:
-        print(f'Could not write file {filepath}', file=sys.stderr)
+        print(f'Error: Could not write file {filepath}', file=sys.stderr)
         exit(1)
 
     if executable:
@@ -96,7 +96,7 @@ def makeFileExecutable(filepath):
         st = os.stat(filepath)
         os.chmod(filepath, st.st_mode | stat.S_IEXEC)
     except:
-        print(f'Unable to change permissions of file {filepath}')
+        print(f'Error: Unable to change permissions of file {filepath}', file=sys.stderr)
 
 # Decorator function for timing a given function
 def timer(*args, **kwargs):
@@ -134,20 +134,28 @@ def timed_run(func, *args, **kwargs):
     }
 
 # Decorator to compare multiple solution answers and runtimes
-# TODO: Fix compare function to work with new timer decorator
 def compare(func):
     def inner():
         solutions = func()
 
+        solutions = solutions[0] if isinstance(solutions, list) and len(solutions) == 1 else solutions
+
         if isinstance(solutions, list):
             solutions_match = len(set(solution['return_value'] for solution in solutions)) == 1
             match_text = f'{Fore.GREEN}match{Style.RESET_ALL}!'
-            do_not_match_text = f'{Fore.RED}do not match{Style.RESET_ALL}.'
+            do_not_match_text = f'{Fore.RED}do not match{Style.RESET_ALL}. Skipping runtime comparison.'
 
             if solutions_match:
                 print(f'Solutions {match_text}')
             else:
                 print(f'Solutions {do_not_match_text}')
+                return None
+
+            if any(solution['name'] == None for solution in solutions):
+                print('Warning: All timers must be given names to be compared to other timers.', file=sys.stderr)
+                return None
+            elif not len(set([solution['name'] for solution in solutions])) == len(solutions):
+                print('Warning: Cannot compare two timers with the same name.', file=sys.stderr)
                 return None
 
             fastest_solution = min(solutions, key=lambda s: s['time_to_run'])
