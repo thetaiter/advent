@@ -154,7 +154,7 @@ def compare(func):
             if any(solution['name'] == None for solution in solutions):
                 print('Warning: All timers must be given names to be compared to other timers.', file=sys.stderr)
                 return None
-            elif not len(set([solution['name'] for solution in solutions])) == len(solutions):
+            elif not len(set(solution['name'] for solution in solutions)) == len(solutions):
                 print('Warning: Cannot compare two timers with the same name.', file=sys.stderr)
                 return None
 
