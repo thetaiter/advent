@@ -134,6 +134,7 @@ def timed_run(func, *args, **kwargs):
     }
 
 # Decorator to compare multiple solution answers and runtimes
+# TODO: Fix compare function to work with new timer decorator
 def compare(func):
     def inner():
         solutions = func()
