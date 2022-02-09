@@ -123,23 +123,17 @@ class timer(object):
         return inner
 
 # Compare two solution answers and runtimes
-# TODO: Compare more than 2 solutions
 def compare(func):
     def inner():
         solutions = func()
 
-        solution1 = solutions[0]["return_value"]
-        solution2 = solutions[1]["return_value"]
+        fastest_solution = min(solutions, key=lambda s: s["time_to_run"])
 
-        if solution1 == solution2:
+        if len(set(solution["return_value"] for solution in solutions)) == 1:
             print(f"Solutions {Fore.GREEN}match{Style.RESET_ALL}!")
         else:
             print(f"Solutions {Fore.RED}do not match{Style.RESET_ALL}.")
 
-        solution1_time = solutions[0]['time_to_run']
-        solution2_time = solutions[1]['time_to_run']
-        faster_solution = solutions[int(solution1_time > solution2_time)]['name']
-
-        print(f"The {faster_solution} solution was {'faster' if len(solutions) == 2 else 'the fastest'}.")
+        print(f"The {Style.BRIGHT}{Fore.LIGHTBLUE_EX}{fastest_solution['name']}{Style.RESET_ALL} solution was {'faster' if len(solutions) == 2 else 'the fastest'}.")
 
     return inner

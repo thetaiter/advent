@@ -32,24 +32,12 @@ def getTimesDepthIncreasedWithZipListComprehension():
     print(f"{timesDepthIncreased}")
     return timesDepthIncreased
 
-@timer('Another Method')
-def getTimesDepthIncreasedWithAnother():
-    timesDepthIncreased = 0
-
-    increasedArray = [int(j) > int(i) for i, j in zip(data, data[1:])]
-    timesDepthIncreased = len([item for item in increasedArray if item == True])
-    time.sleep(1)
-
-    print(f"{timesDepthIncreased}")
-    return timesDepthIncreased
-
 # Run the solutions and compare them
 @compare
 def runSolutions():
     return [
         getTimesDepthIncreasedWithForLoop(),
-        getTimesDepthIncreasedWithZipListComprehension(),
-        getTimesDepthIncreasedWithAnother(),
+        getTimesDepthIncreasedWithZipListComprehension()
     ]
 
 runSolutions()
