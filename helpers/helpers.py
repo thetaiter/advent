@@ -4,6 +4,7 @@ import sys
 import stat
 import time
 import fnmatch
+from colorama import Fore, Style
 from pathlib import Path
 from urllib import request
 from html2text import html2text
@@ -97,12 +98,48 @@ def makeFileExecutable(filepath):
     except:
         print(f'Unable to change permissions of file {filepath}')
 
-# Timer decorator function
-def timer(func):
+# Timer decorator class with arguments (name)
+class timer(object):
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, func):
+        def inner():
+            print(f"{Style.BRIGHT}{Fore.LIGHTBLUE_EX}{self.name}{Style.RESET_ALL}")
+
+            start = time.time()
+            return_value = func()
+            end = time.time()
+
+            time_to_run = end - start
+            print(time_to_run, 'seconds')
+
+            return {
+                "name": self.name,
+                "return_value": return_value,
+                "time_to_run": time_to_run
+            }
+
+        return inner
+
+# Compare two solution answers and runtimes
+# TODO: Compare more than 2 solutions
+def compare(func):
     def inner():
-        start = time.time()
-        func()
-        end = time.time()
-        print('Time to run:', end - start, 'seconds')
+        solutions = func()
+
+        solution1 = solutions[0]["return_value"]
+        solution2 = solutions[1]["return_value"]
+
+        if solution1 == solution2:
+            print(f"Solutions {Fore.GREEN}match{Style.RESET_ALL}!")
+        else:
+            print(f"Solutions {Fore.RED}do not match{Style.RESET_ALL}.")
+
+        solution1_time = solutions[0]['time_to_run']
+        solution2_time = solutions[1]['time_to_run']
+        faster_solution = solutions[int(solution1_time > solution2_time)]['name']
+
+        print(f"The {faster_solution} solution was {'faster' if len(solutions) == 2 else 'the fastest'}.")
 
     return inner

@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO: Rewrite this in python
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
