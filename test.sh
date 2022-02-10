@@ -1,6 +1,6 @@
 #!/bin/bash
-# TODO: Rewrite this in python
 
+# Initialize variables
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -14,6 +14,7 @@ num_passed=0
 template="helpers/template.py"
 parts=( $(find . -type f -name 'part*.py' | sort) )
 
+# Set up logging mechanisms
 function print() {
     local level="${1}"
     local text="${2}"
@@ -61,6 +62,7 @@ function error() {
     log 'ERROR' "${1}"
 }
 
+# Test a single solution
 function run_test() {
     local part="${1}"
     local test_failed=false
@@ -70,7 +72,11 @@ function run_test() {
 
     NEWLINE=false info "Running ${part}..."
 
-    if diff -q "${part}" "${template}" > /dev/null
+    if grep -q '# Skip Test' "${part}"
+    then
+        skipped_message="# Skip Test was specified for this solution"
+        test_skipped=true
+    elif diff -q "${part}" "${template}" > /dev/null
     then
         skipped_message="File matches template"
         test_skipped=true
@@ -109,7 +115,12 @@ function run_test() {
                 test_failed=true
             else
                 result="$(echo "${result}" | head -n 1)"
-                if ! [ "${result}" -eq "${answer}" ]
+                local re='^[0-9]+$'
+                if ! [[ "${result}" =~ $re ]]
+                then
+                    failure_message="Your answer was \`${result}\` which is not a number."
+                    test_failed=true
+                elif ! [ "${result}" -eq "${answer}" ]
                 then
                     failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
                     test_failed=true
@@ -121,12 +132,12 @@ function run_test() {
     if [ "${test_failed}" = true ]
     then
         printf -- "${RED}Failed :(${NO_COLOR}\n"
-        error "${failure_message}"
+        error "    ${failure_message}"
         num_failed=$((num_failed+1))
     elif [ "${test_skipped}" = true ]
     then
         printf -- "${YELLOW}Skipped :|${NO_COLOR}\n"
-        warn "${skipped_message}"
+        warn "    ${skipped_message}"
         num_skipped=$((num_skipped+1))
     else
         printf -- "${GREEN}Passed :)${NO_COLOR}\n"
@@ -134,6 +145,7 @@ function run_test() {
     fi
 }
 
+# Loop through all solutions and test them one by one
 function run_tests() {
     info "Running tests"
 
@@ -145,6 +157,7 @@ function run_tests() {
     info "\nTests completed successfully\n"
 }
 
+# Print the results of the tests
 function print_results() {
     local total_tests="$((num_failed + num_skipped + num_passed))"
     local percent_failed="$(echo "${num_failed}/${total_tests}*100" | bc -l)"
@@ -157,9 +170,11 @@ function print_results() {
     info "$(printf -- "${GREEN}%3s (%.4g%%%%)${NO_COLOR} passed\n" "${num_passed}" "${percent_passed}")\n"
 }
 
+# Execute the above functions
 run_tests
 print_results
 
+# Return non-zero status if any tests failed
 if [ "${num_failed}" -ne 0 ]
 then
     exit 1
