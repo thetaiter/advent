@@ -49,8 +49,7 @@ def readFile(filepath, return_type=list):
         with open(os.path.join(sys.path[0], filepath), 'r') as f:
             content = f.read()
     except:
-        print(f'Error: Could not read file {filepath}', file=sys.stderr)
-        exit(1)
+        raise Exception(f'Could not read file {filepath}')
 
     if return_type == str:
         return content
@@ -58,8 +57,7 @@ def readFile(filepath, return_type=list):
         content = content.splitlines()
         return list(content[0]) if len(content) == 1 else content
     else:
-        print(f'Error: Unsupported return type for readFile method: {return_type}', file=sys.stderr)
-        exit(1)
+        raise Exception(f'Unsupported return type for readFile method: {return_type}')
 
 # Write content to a file and optionally make it executable
 def writeFile(filepath, content, executable=False):
@@ -68,7 +66,7 @@ def writeFile(filepath, content, executable=False):
     if os.path.exists(filepath):
         response = input(f'File {filepath} already exists. Overwrite? (y/n) [n]: ')
         if response.lower() != 'y':
-            print('Aborting.', file=sys.stderr)
+            print('Aborting.')
             exit(1)
 
     filedir = os.path.dirname(filepath)
@@ -80,8 +78,7 @@ def writeFile(filepath, content, executable=False):
         with open(filepath, 'w') as f:
             f.write(content)
     except:
-        print(f'Error: Could not write file {filepath}', file=sys.stderr)
-        exit(1)
+        raise Exception(f'Could not write file {filepath}')
 
     if executable:
         makeFileExecutable(filepath)
@@ -96,7 +93,7 @@ def makeFileExecutable(filepath):
         st = os.stat(filepath)
         os.chmod(filepath, st.st_mode | stat.S_IEXEC)
     except:
-        print(f'Error: Unable to change permissions of file {filepath}', file=sys.stderr)
+        raise Exception(f'Unable to change permissions of file {filepath}')
 
 # Decorator function for timing a given function
 def timer(*args, **kwargs):
@@ -137,7 +134,6 @@ def timed_run(func, *args, **kwargs):
 def compare(func):
     def inner():
         solutions = func()
-
         solutions = solutions[0] if isinstance(solutions, list) and len(solutions) == 1 else solutions
 
         if isinstance(solutions, list):
@@ -163,8 +159,10 @@ def compare(func):
             verbiage = 'faster' if len(solutions) == 2 else 'the fastest'
 
             print(f'The {fastest_solution_name} solution was {verbiage}.')
-        else:
+        elif isinstance(solutions, dict):
             fastest_solution = solutions
+        else:
+            raise Exception(f'Comparing solutions of type \'{type(solutions)}\' is not supported.')
 
         return fastest_solution
 
