@@ -21,14 +21,14 @@ For example:
 
 <details>
     <summary>Reveal the answer!</summary>
-    Your puzzle answer was <code>______</code>.
+    Your puzzle answer was <code>346386</code>.
 </details>
 
 ## --- Part Two ---
 
-
+Now find one that starts with six zeroes.
 
 <details>
     <summary>Reveal the answer!</summary>
-    Your puzzle answer was <code>______</code>.
+    Your puzzle answer was <code>9958218</code>.
 </details>
