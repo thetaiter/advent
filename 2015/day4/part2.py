@@ -1,19 +1,11 @@
 #!/usr/bin/env python
 
 # Import helper functions included in this repository
-from hashlib import md5
 from helpers import getInput
+from utils import get_number_for_hash_starting_with_zeros
 
 # Get Data
 data = getInput(return_type=str)
 
 # Solution
-md5_hex = ""
-number = 0
-zeros = 6
-
-while md5_hex[:zeros] != zeros * "0":
-    number += 1
-    md5_hex = md5(f"{data}{number}".encode("utf-8")).hexdigest()
-
-print(number)
+print(get_number_for_hash_starting_with_zeros(data, zeros=6))
