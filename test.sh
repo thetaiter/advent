@@ -105,7 +105,7 @@ function run_test() {
         else
             local result
             set +e
-            result="$(python3 "${part}" 2>&1)"
+            result="$(python3 "${part}" --test 2>&1)"
             local err_code="${?}"
             set -e
 
@@ -114,7 +114,13 @@ function run_test() {
                 failure_message="${result}"
                 test_failed=true
             else
-                result="$(echo "${result}" | head -n 1)"
+                result="$(echo "${result}" | tail -n 1)"
+
+                if [[ "${result}" == '{'* ]]
+                then
+                    result="$(echo "${result}" | sed "s/'/\"/g" | jq .return_value)"
+                fi
+
                 local re='^[0-9]+$'
                 if ! [[ "${result}" =~ $re ]]
                 then

@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 
-# Temporary until I can update tests to work for solutions using the @timer and @compare decorators.
-# The below comment will skip testing this solution when tests are run
-# Skip Test
-
 # Import helper functions included in this repository
+import argparse
 from helpers import getInput, timer, compare
+
+# Parse Arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("-t", "--test", help="Specify that this is a test run", action="store_true")
+args = parser.parse_args()
 
 # Get Data
 data = getInput()
 
 # For Loop Method
-@timer
+@timer('For Loop')
 def getTimesDepthIncreasedWithForLoop():
     timesDepthIncreased = 0
 
@@ -27,7 +29,7 @@ def getTimesDepthIncreasedWithForLoop():
     return timesDepthIncreased
 
 # Zip + List Comprehension Method
-@timer
+@timer('Zip List Comprehension')
 def getTimesDepthIncreasedWithZipListComprehension():
     timesDepthIncreased = 0
 
@@ -41,7 +43,11 @@ def getTimesDepthIncreasedWithZipListComprehension():
 # Run the solutions and compare them
 @compare
 def runSolutions():
-    getTimesDepthIncreasedWithForLoop()
-    getTimesDepthIncreasedWithZipListComprehension()
+    return [
+        getTimesDepthIncreasedWithForLoop(),
+        getTimesDepthIncreasedWithZipListComprehension()
+    ]
 
-runSolutions()
+solutions = runSolutions()
+if args.test:
+    print(solutions)
