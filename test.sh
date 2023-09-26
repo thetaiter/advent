@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get current directory
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
 # Initialize variables
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -12,7 +15,10 @@ num_skipped=0
 num_passed=0
 
 template="helpers/template.py"
-parts=( $(find . -type f -name 'part*.py' | sort) )
+directory="${1:-.}"
+
+cd "${SCRIPT_DIR}"
+parts=( $(find "${directory}" -type f -name 'part*.py' | sort) )
 
 # Set up logging mechanisms
 function print() {
