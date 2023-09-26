@@ -168,4 +168,5 @@ def compare(func):
 
     return inner
 
-print("hello")
+if __name__ == '__name__':
+    print("hello")
