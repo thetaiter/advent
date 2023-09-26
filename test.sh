@@ -17,12 +17,6 @@ num_passed=0
 template="helpers/template.py"
 directory="${1:-.}"
 
-python_executable=python
-if ! [ -z "${Python_ROOT_DIR}" ]
-then
-    python_executable="${Python_ROOT_DIR}/bin/python"
-fi
-
 cd "${SCRIPT_DIR}"
 parts=( $(find "${directory}" -type f -name 'part*.py' | sort) )
 
@@ -117,7 +111,7 @@ function run_test() {
         else
             local result
             set +e
-            result="$(${python_executable} "${part}" --test 2>&1)"
+            result="$(python "${part}" --test 2>&1)"
             local err_code="${?}"
             set -e
 
@@ -127,11 +121,6 @@ function run_test() {
                 test_failed=true
             else
                 result="$(echo "${result}" | tail -n 1)"
-
-                if [[ "${result}" == '{'* ]]
-                then
-                    result="$(echo "${result}" | sed "s/'/\"/g" | jq .return_value)"
-                fi
 
                 local re='^[0-9]+$'
                 if ! [[ "${result}" =~ $re ]]

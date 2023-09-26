@@ -48,6 +48,6 @@ def runSolutions():
         getTimesDepthIncreasedWithZipListComprehension()
     ]
 
-solutions = runSolutions()
+solution = runSolutions()
 if args.test:
-    print(solutions)
+    print(solution["return_value"])
