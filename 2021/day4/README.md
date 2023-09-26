@@ -42,7 +42,7 @@ After the first five numbers are drawn (`7`, `4`, `9`, `5`, and `11`), there are
  1 12 20 15 19        14 21 16 12  6         2  0 12  3  7
 ```
 
-After the next six numbers are drawn (17, 23, 2, 0, 14, and 21), there are still no winners:
+After the next six numbers are drawn (`17`, `23`, `2`, `0`, `14`, and `21`), there are still no winners:
 
 ```text
 22 13 17 11  0         3 15  0  2 22        14 21 17 24  4
@@ -70,14 +70,20 @@ To guarantee victory against the giant squid, figure out which board will win fi
 
 <details>
     <summary>Reveal the answer!</summary>
-    Your puzzle answer was <code>______</code>.
+    Your puzzle answer was <code>50008</code>.
 </details>
 
 ## --- Part Two ---
 
+On the other hand, it might be wise to try a different strategy: let the giant squid win.
 
+You aren't sure how many bingo boards a giant squid could play at once, so rather than waste time counting its arms, the safe thing to do is to figure out which board will win last and choose that one. That way, no matter which boards it picks, it will win for sure.
+
+In the above example, the second board is the last to win, which happens after `13` is eventually called and its middle column is completely marked. If you were to keep playing until this point, the second board would have a sum of unmarked numbers equal to `148` for a final score of `148 * 13 = 1924`.
+
+Figure out which board will win last. Once it wins, what would its final score be?
 
 <details>
     <summary>Reveal the answer!</summary>
-    Your puzzle answer was <code>______</code>.
+    Your puzzle answer was <code>17408</code>.
 </details>
