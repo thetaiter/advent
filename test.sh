@@ -111,7 +111,7 @@ function run_test() {
         else
             local result
             set +e
-            result="$(python3 "${part}" --test 2>&1)"
+            result="$(python "${part}" --test 2>&1)"
             local err_code="${?}"
             set -e
 
