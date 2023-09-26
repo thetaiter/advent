@@ -167,3 +167,5 @@ def compare(func):
         return fastest_solution
 
     return inner
+
+print("hello")
