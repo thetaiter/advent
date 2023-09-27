@@ -18,9 +18,9 @@ template="helpers/template.py"
 directory="${1:-.}"
 python_executable="python"
 
-if ! [ -z "${Python_ROOT_DIR}" ]
+if [ -f "/usr/bin/python" ]
 then
-    python_executable="${Python_ROOT_DIR}/bin/python"
+    python_executable="/usr/bin/python"
 fi
 
 cd "${SCRIPT_DIR}"
