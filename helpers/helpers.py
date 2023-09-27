@@ -167,6 +167,3 @@ def compare(func):
         return fastest_solution
 
     return inner
-
-if __name__ == '__main__':
-    print("hello")
