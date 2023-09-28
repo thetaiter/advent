@@ -10,8 +10,8 @@ data = getInput()
 floor = 0
 
 move = {
-    '(': lambda: globals().update(floor = floor + 1),
-    ')': lambda: globals().update(floor = floor - 1) if floor >= 0 else True
+    "(": lambda: globals().update(floor=floor + 1),
+    ")": lambda: globals().update(floor=floor - 1) if floor >= 0 else True,
 }
 
 position = 0

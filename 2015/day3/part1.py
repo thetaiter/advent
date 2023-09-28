@@ -8,16 +8,16 @@ data = getInput()
 
 # Define movement dictionary
 move = {
-    '>': lambda p: [p[0] + 1, p[1]],
-    '<': lambda p: [p[0] - 1, p[1]],
-    '^': lambda p: [p[0], p[1] + 1],
-    'v': lambda p: [p[0], p[1] - 1],
+    ">": lambda p: [p[0] + 1, p[1]],
+    "<": lambda p: [p[0] - 1, p[1]],
+    "^": lambda p: [p[0], p[1] + 1],
+    "v": lambda p: [p[0], p[1] - 1],
 }
 
 # Initialize variables
 houses = 1
-position = [0,0]
-positions = [[0,0]]
+position = [0, 0]
+positions = [[0, 0]]
 
 # Loop through directions
 for direction in data:

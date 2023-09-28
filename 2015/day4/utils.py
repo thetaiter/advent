@@ -1,6 +1,7 @@
 from hashlib import md5
 
-def get_number_for_hash_starting_with_zeros(data, zeros = 5):
+
+def get_number_for_hash_starting_with_zeros(data, zeros=5):
     md5_hex = ""
     number = 0
 

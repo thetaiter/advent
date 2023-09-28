@@ -8,15 +8,15 @@ data = getInput(str)
 
 # Define movement dictionary
 move = {
-    '>': lambda p: [p[0] + 1, p[1]],
-    '<': lambda p: [p[0] - 1, p[1]],
-    '^': lambda p: [p[0], p[1] + 1],
-    'v': lambda p: [p[0], p[1] - 1],
+    ">": lambda p: [p[0] + 1, p[1]],
+    "<": lambda p: [p[0] - 1, p[1]],
+    "^": lambda p: [p[0], p[1] + 1],
+    "v": lambda p: [p[0], p[1] - 1],
 }
 
 # Initialize variables
 houses = 1
-santa_position = [0,0]
+santa_position = [0, 0]
 robo_position = [0, 0]
 positions = [[0, 0]]
 

@@ -5,5 +5,3 @@ from helpers import getInput
 
 # Get Data
 data = getInput()
-
-

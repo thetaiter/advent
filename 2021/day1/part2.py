@@ -6,21 +6,24 @@ from helpers import getInput, timer, compare
 
 # Parse Arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("-t", "--test", help="Specify that this is a test run", action="store_true")
+parser.add_argument(
+    "-t", "--test", help="Specify that this is a test run", action="store_true"
+)
 args = parser.parse_args()
 
 # Get Data
 data = getInput()
 
+
 # For Loop Method
-@timer('For Loop')
+@timer("For Loop")
 def getTimesDepthIncreasedWithForLoop():
     timesDepthIncreased = 0
 
     for i, line in enumerate(data):
-        if i > 0 and i < len(data)-2:
-            previousDepth = int(data[i-1]) + int(data[i]) + int(data[i+1])
-            currentDepth = int(data[i]) + int(data[i+1]) + int(data[i+2])
+        if i > 0 and i < len(data) - 2:
+            previousDepth = int(data[i - 1]) + int(data[i]) + int(data[i + 1])
+            currentDepth = int(data[i]) + int(data[i + 1]) + int(data[i + 2])
 
             if currentDepth > previousDepth:
                 timesDepthIncreased += 1
@@ -28,8 +31,9 @@ def getTimesDepthIncreasedWithForLoop():
     print(timesDepthIncreased)
     return timesDepthIncreased
 
+
 # Zip + List Comprehension Method
-@timer('Zip List Comprehension')
+@timer("Zip List Comprehension")
 def getTimesDepthIncreasedWithZipListComprehension():
     timesDepthIncreased = 0
 
@@ -40,13 +44,15 @@ def getTimesDepthIncreasedWithZipListComprehension():
     print(timesDepthIncreased)
     return timesDepthIncreased
 
+
 # Run the solutions and compare them
 @compare
 def runSolutions():
     return [
         getTimesDepthIncreasedWithForLoop(),
-        getTimesDepthIncreasedWithZipListComprehension()
+        getTimesDepthIncreasedWithZipListComprehension(),
     ]
+
 
 solution = runSolutions()
 if args.test:

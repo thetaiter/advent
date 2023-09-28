@@ -8,18 +8,17 @@ class BingoGame(object):
     picked_numbers = []
     game_boards = []
     winners = []
-    marker = 'X'
-
+    marker = "X"
 
     # Prepare the game data
     def __init__(self, data):
         self.data = data
-        self.numbers = [int(item) for item in self.data.pop(0).split(',')]
-        self.data.remove('')
+        self.numbers = [int(item) for item in self.data.pop(0).split(",")]
+        self.data.remove("")
 
         game_board = []
         for game_board_row in self.data:
-            if game_board_row == '':
+            if game_board_row == "":
                 self.game_boards.append(game_board)
                 game_board = []
                 continue
@@ -32,23 +31,33 @@ class BingoGame(object):
         for row in board:
             for item in row:
                 if len(str(item)) == 1:
-                    print(f" {item}", end='')
+                    print(f" {item}", end="")
                 else:
-                    print(item, end='')
-                print(' ', end='')
+                    print(item, end="")
+                print(" ", end="")
             print()
 
     # Print the numbers and game boards (for debugging)
     def print_game(self):
         if self.picked_numbers:
-            print('Picked Numbers:', ', '.join(str(item) for item in self.picked_numbers), '\n')
+            print(
+                "Picked Numbers:",
+                ", ".join(str(item) for item in self.picked_numbers),
+                "\n",
+            )
 
         if self.numbers:
-            print('Numbers Remaining:',', '.join(str(item) for item in self.numbers), '\n')
+            print(
+                "Numbers Remaining:",
+                ", ".join(str(item) for item in self.numbers),
+                "\n",
+            )
 
-        print('Game Boards:')
+        print("Game Boards:")
         for i, game_board in enumerate(self.game_boards):
-            if not any(winner.get("game_board_number") == i+1 for winner in self.winners):
+            if not any(
+                winner.get("game_board_number") == i + 1 for winner in self.winners
+            ):
                 self.print_board(game_board)
                 if i != len(self.game_boards) - 1:
                     print()
@@ -62,7 +71,9 @@ class BingoGame(object):
     # Update game boards
     def update_game_boards(self, number):
         for i in range(len(self.game_boards)):
-            if not any(winner.get("game_board_number") == i+1 for winner in self.winners):
+            if not any(
+                winner.get("game_board_number") == i + 1 for winner in self.winners
+            ):
                 for j in range(len(self.game_boards[i])):
                     for k, item in enumerate(self.game_boards[i][j]):
                         if item == number:
@@ -92,22 +103,29 @@ class BingoGame(object):
                 return True
 
     # Check all boards for winners
-    def get_winners(self, ):
+    def get_winners(
+        self,
+    ):
         for i, game_board in enumerate(self.game_boards):
-            if not any(winner.get("game_board_number") == i+1 for winner in self.winners) \
-               and self.check_winner(game_board):
-                self.winners.append({
-                    "game_board_number": i+1,
-                    "game_board": copy.deepcopy(game_board),
-                    "winning_number": self.picked_numbers[-1],
-                    "score": self.get_score(game_board)
-                })
+            if not any(
+                winner.get("game_board_number") == i + 1 for winner in self.winners
+            ) and self.check_winner(game_board):
+                self.winners.append(
+                    {
+                        "game_board_number": i + 1,
+                        "game_board": copy.deepcopy(game_board),
+                        "winning_number": self.picked_numbers[-1],
+                        "score": self.get_score(game_board),
+                    }
+                )
 
         return self.winners
 
     # Print game winner information (for debugging)
     def print_winner(self, winner):
-        print(f"Game board {winner['game_board_number']} won with number {winner['winning_number']}!\n")
+        print(
+            f"Game board {winner['game_board_number']} won with number {winner['winning_number']}!\n"
+        )
         self.print_board(winner["game_board"])
         print()
         print(f"Score: {winner['score']}")

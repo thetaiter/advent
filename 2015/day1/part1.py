@@ -10,8 +10,8 @@ data = getInput()
 floor = 0
 
 move = {
-    '(': lambda: globals().update(floor = floor + 1),
-    ')': lambda: globals().update(floor = floor - 1),   
+    "(": lambda: globals().update(floor=floor + 1),
+    ")": lambda: globals().update(floor=floor - 1),
 }
 
 [move[char]() for char in data]

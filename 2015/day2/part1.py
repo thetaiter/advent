@@ -5,7 +5,7 @@ from helpers import getInput
 
 # Get Data
 data = getInput()
-data = [[int(side) for side in box.split('x')] for box in data]
+data = [[int(side) for side in box.split("x")] for box in data]
 
 # Calculate surface area
 total_surface_area = 0

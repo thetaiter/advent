@@ -5,12 +5,12 @@ from helpers import getInput
 
 # Get Data
 data = getInput()
-data = [box.split('x') for box in data]
+data = [box.split("x") for box in data]
 
 # Calculate feet of ribbon
 feet_of_ribbon = 0
 for box in data:
-    bow = eval('*'.join(box))
+    bow = eval("*".join(box))
     box = [int(side) for side in box]
     box.remove(max(box))
     wrap = 2 * sum(box)
