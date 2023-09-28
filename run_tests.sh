@@ -115,12 +115,22 @@ function run_test() {
             skipped_message="File \`${part}\` does not match template, but answer has not yet been set"
             test_skipped=true
         else
-            local result
-            set +e
-            result="$(${python_executable} "${part}" --test 2>&1)"
-            local err_code="${?}"
-            set -e
+            local max_retries=3
+            local try_number=1
+            local err_code=139
+            local result=""
 
+            # Retry on segmentation fault
+            while [ "${err_code}" -eq 139 ] \
+                && [ "${try_number}" -ne "${max_retries}" ]
+            do
+                set +e
+                result="$(${python_executable} "${part}" --test 2>&1)"
+                err_code="${?}"
+                set -e
+                try_number="$((try_number+1))"
+            done
+                
             if [ "${err_code}" -ne 0 ]
             then
                 failure_message="${result}"
