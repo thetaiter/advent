@@ -39,12 +39,14 @@ def getProblem(year=2015, day=1):
     text_array.append("    <summary>Reveal the answer!</summary>")
     text_array.append("    Your puzzle answer was <code>______</code>.")
     text_array.append("</details>\n")
+    print("\n".join(text_array))
     problem = (
         "\n".join(text_array)
-        .replace("\-", "-")
+        .replace(r"\-", "-")
         .replace("  *", "-")
         .replace("## --- Day", "# --- Day")
     )
+    print(problem)
 
     return problem
 
@@ -56,7 +58,7 @@ def readFile(filepath, return_type=list):
     try:
         with open(os.path.join(sys.path[0], filepath), "r") as f:
             content = f.read()
-    except:
+    except Exception:
         raise Exception(f"Could not read file {filepath}")
 
     if return_type == str:
@@ -86,7 +88,7 @@ def writeFile(filepath, content, executable=False):
     try:
         with open(filepath, "w") as f:
             f.write(content)
-    except:
+    except Exception:
         raise Exception(f"Could not write file {filepath}")
 
     if executable:
@@ -103,7 +105,7 @@ def makeFileExecutable(filepath):
     try:
         st = os.stat(filepath)
         os.chmod(filepath, st.st_mode | stat.S_IEXEC)
-    except:
+    except Exception:
         raise Exception(f"Unable to change permissions of file {filepath}")
 
 
@@ -169,9 +171,12 @@ def compare(func):
                 print(f"Solutions {do_not_match_text}")
                 return None
 
-            if any(solution["name"] == None for solution in solutions):
+            if any(solution["name"] is None for solution in solutions):
                 print(
-                    "Warning: All timers must be given names to be compared to other timers.",
+                    (
+                        "Warning: All timers must be given names to be"
+                        " compared to other timers."
+                    ),
                     file=sys.stderr,
                 )
                 return None
@@ -185,7 +190,10 @@ def compare(func):
                 return None
 
             fastest_solution = min(solutions, key=lambda s: s["time_to_run"])
-            fastest_solution_name = f'{Style.BRIGHT}{Fore.LIGHTBLUE_EX}{fastest_solution["name"]}{Style.RESET_ALL}'
+            fastest_solution_name = (
+                f"{Style.BRIGHT}{Fore.LIGHTBLUE_EX}"
+                f"{fastest_solution['name']}{Style.RESET_ALL}"
+            )
             verbiage = "faster" if len(solutions) == 2 else "the fastest"
 
             print(f"The {fastest_solution_name} solution was {verbiage}.")

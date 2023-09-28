@@ -123,9 +123,9 @@ class BingoGame(object):
 
     # Print game winner information (for debugging)
     def print_winner(self, winner):
-        print(
-            f"Game board {winner['game_board_number']} won with number {winner['winning_number']}!\n"
-        )
+        board_number = winner["game_board_number"]
+        winning_number = winner["winning_number"]
+        print(f"Game board {board_number} won with number {winning_number}!\n")
         self.print_board(winner["game_board"])
         print()
         print(f"Score: {winner['score']}")

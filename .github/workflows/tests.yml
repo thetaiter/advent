@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: "Lint and Test"
+    name: "Format, Lint, and Test"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -25,14 +25,12 @@ jobs:
         /usr/bin/pip install -r requirements.txt
         /usr/bin/pip install -e helpers
     - name: Check code format with Black
-      run: |
-        /usr/bin/python -m black --check .
+      run: /usr/bin/python -m black --check .
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --extend-ignore=E203 --show-source --statistics
+        flake8 . --select=E9,F63,F7,F82 --extend-ignore=E203 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide.
-        flake8 . --count --exit-zero --extend-ignore=E203 --max-complexity=10 --max-line-length=88 --statistics
+        flake8 . --extend-ignore=E203 --max-complexity=10 --max-line-length=88 --statistics
     - name: Run tests
-      run: |
-        ./run_tests.sh
+      run: ./run_tests.sh

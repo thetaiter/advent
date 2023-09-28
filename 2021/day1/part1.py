@@ -36,7 +36,7 @@ def getTimesDepthIncreasedWithForLoop():
 @timer("Zip List Comprehension")
 def getTimesDepthIncreasedWithZipListComprehension():
     increasedArray = [int(j) > int(i) for i, j in zip(data, data[1:])]
-    timesDepthIncreased = len([item for item in increasedArray if item == True])
+    timesDepthIncreased = len([item for item in increasedArray if item])
 
     print(f"{timesDepthIncreased}")
     return timesDepthIncreased

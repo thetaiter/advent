@@ -39,7 +39,7 @@ def getTimesDepthIncreasedWithZipListComprehension():
 
     depthArray = [int(j) + int(i) + int(k) for i, j, k in zip(data, data[1:], data[2:])]
     increasedArray = [int(j) > int(i) for i, j in zip(depthArray, depthArray[1:])]
-    timesDepthIncreased = len([item for item in increasedArray if item == True])
+    timesDepthIncreased = len([item for item in increasedArray if item])
 
     print(timesDepthIncreased)
     return timesDepthIncreased

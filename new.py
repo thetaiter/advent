@@ -2,17 +2,19 @@
 
 import sys
 from datetime import date
-from helpers import *
+from helpers import getProblem, readFile, touchFile, writeFile
 
 description = (
     "Generate the directories and files for a new Advent of Code problem automatically"
 )
 usage = f"""Usage: {sys.argv[0]} [year] [day]
 
-[year] Must be a 4 digit integer between 2015 and the current year (inclusive), default is 2015
-[day] Must be an integer between 1 and 25, default is 1
+[year] Must be a 4 digit integer between 2015 and the current year (inclusive),
+       default is 2015
+[day]  Must be an integer between 1 and 25, default is 1
 
-Note: If [year] is the current year, [day] cannot be a day in December that has not yet come to pass"""
+Note:  If [year] is the current year, [day] cannot be a day in December that has
+       not yet come to pass"""
 
 # Parse commandline arguments
 if any(h in sys.argv for h in ["help", "-help", "--help", "-h"]):
@@ -25,7 +27,7 @@ problem_date = [2015, 1]
 for index, arg in enumerate(sys.argv[1:]):
     try:
         problem_date[index] = int(arg)
-    except:
+    except Exception:
         print(f"Invalid argument: {arg}", file=sys.stderr)
         print(usage, file=sys.stderr)
         exit(1)
@@ -57,5 +59,5 @@ part2_file = f"{problem_dir}/part2.py"
 writeFile(part1_file, part_template, executable=True)
 writeFile(part2_file, part_template, executable=True)
 
-# Touch input.txt file (cannot get content automatically yet, it requires authentication)
+# Touch input.txt file (cant get content automatically yet, requires authentication)
 touchFile(f"{problem_dir}/input.txt")
