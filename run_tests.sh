@@ -130,7 +130,7 @@ function run_test() {
                 set -e
                 try_number="$((try_number+1))"
             done
-                
+
             if [ "${err_code}" -ne 0 ]
             then
                 failure_message="${result}"

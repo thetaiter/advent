@@ -62,7 +62,7 @@ def readFile(filepath, return_type=list):
         raise Exception(f"Could not read file {filepath}")
 
     if return_type == str:
-        return content
+        return content.rstrip()
     elif return_type == list:
         content = content.splitlines()
         return list(content[0]) if len(content) == 1 else content
