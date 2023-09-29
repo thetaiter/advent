@@ -56,8 +56,8 @@ writeFile(f"{problem_dir}/README.md", problem)
 part_template = readFile("helpers/template.py", return_type=str)
 part1_file = f"{problem_dir}/part1.py"
 part2_file = f"{problem_dir}/part2.py"
-writeFile(part1_file, part_template, executable=True)
-writeFile(part2_file, part_template, executable=True)
+writeFile(part1_file, f"{part_template}\n\n\n", executable=True)
+writeFile(part2_file, f"{part_template}\n\n\n", executable=True)
 
 # Touch input.txt file (cant get content automatically yet, requires authentication)
 touchFile(f"{problem_dir}/input.txt")
