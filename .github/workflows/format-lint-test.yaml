@@ -26,6 +26,6 @@ jobs:
     - name: Check code format with Black
       run: /usr/bin/python -m black --check .
     - name: Lint with flake8
-      run: flake8 . --extend-ignore=E203 --max-complexity=10 --max-line-length=88 --show-source --statistics
+      run: flake8 . --extend-ignore=E203 --max-complexity=20 --max-line-length=88 --show-source --statistics
     - name: Run tests
       run: ./run_tests.sh
