@@ -39,14 +39,13 @@ def getProblem(year=2015, day=1):
     text_array.append("    <summary>Reveal the answer!</summary>")
     text_array.append("    Your puzzle answer was <code>______</code>.")
     text_array.append("</details>\n")
-    print("\n".join(text_array))
+
     problem = (
         "\n".join(text_array)
         .replace(r"\-", "-")
         .replace("  *", "-")
         .replace("## --- Day", "# --- Day")
     )
-    print(problem)
 
     return problem
 
