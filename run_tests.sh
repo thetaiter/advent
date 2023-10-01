@@ -24,7 +24,7 @@ then
 fi
 
 cd "${SCRIPT_DIR}"
-parts=( $(find "${directory}" -type f -name 'part*.py' | sort) )
+parts=( $(find "${directory}" -type f -name 'part*.py' | sort --version-sort) )
 
 # Set up logging mechanisms
 function print() {
