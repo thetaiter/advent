@@ -137,16 +137,9 @@ function run_test() {
             else
                 result="$(echo "${result}" | tail -n 1)"
 
-                local re='^[0-9]+$'
-                failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
-                if ! [[ "${result}" =~ $re ]]
+                if ! [[ "${result}" == "${answer}" ]]
                 then
-                    if ! [[ "${result}" == "${answer}" ]]
-                    then
-                        test_failed=true
-                    fi
-                elif ! [ "${result}" -eq "${answer}" ]
-                then
+                    failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
                     test_failed=true
                 fi
             fi
