@@ -117,10 +117,9 @@ function run_test() {
         else
             local max_retries=3
             local try_number=1
-            local err_code=139
+            local err_code=139  # Segmentation fault
             local result=""
 
-            # Retry on segmentation fault
             while [ "${err_code}" -eq 139 ] \
                 && [ "${try_number}" -ne "${max_retries}" ]
             do
@@ -139,13 +138,15 @@ function run_test() {
                 result="$(echo "${result}" | tail -n 1)"
 
                 local re='^[0-9]+$'
+                failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
                 if ! [[ "${result}" =~ $re ]]
                 then
-                    failure_message="Your answer was \`${result}\` which is not a number."
-                    test_failed=true
+                    if ! [[ "${result}" == "${answer}" ]]
+                    then
+                        test_failed=true
+                    fi
                 elif ! [ "${result}" -eq "${answer}" ]
                 then
-                    failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
                     test_failed=true
                 fi
             fi
