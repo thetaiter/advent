@@ -11,8 +11,8 @@ from html2text import html2text
 
 
 # Read and return content of input file as a list or a string (list is default)
-def getInput(return_type=list):
-    return readFile("input.txt", return_type)
+def getInput(filename="input.txt", return_type=list):
+    return readFile(filename, return_type)
 
 
 # Automatically get the problem text from adventofcode.com
