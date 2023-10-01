@@ -1,12 +1,15 @@
-# Import required libraries
+# Import built-in libraries
+import fnmatch
+import json
 import os
 import sys
 import stat
 import time
-import fnmatch
-from colorama import Fore, Style
 from pathlib import Path
 from urllib import request
+
+# Import 3rd party libraries
+from colorama import Fore, Style
 from html2text import html2text
 
 
@@ -51,7 +54,7 @@ def getProblem(year=2015, day=1):
 
 
 # Read a file into a list or a string (list is default)
-def readFile(filepath, return_type=list):
+def readFile(filepath: str, return_type=list):
     content = None
 
     try:
@@ -60,7 +63,9 @@ def readFile(filepath, return_type=list):
     except Exception:
         raise Exception(f"Could not read file {filepath}")
 
-    if return_type == str:
+    if filepath.endswith(".json"):
+        return json.loads(content)
+    elif return_type == str:
         return content.rstrip()
     elif return_type == list:
         content = content.splitlines()
