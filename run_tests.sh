@@ -124,7 +124,7 @@ function run_test() {
                 && [ "${try_number}" -ne "${max_retries}" ]
             do
                 set +e
-                result="$(${python_executable} "${part}" --test 2>&1)"
+                result="$(${python_executable} "${part}" --test 2>&1 | tail -n 1)"
                 err_code="${?}"
                 set -e
                 try_number="$((try_number+1))"
@@ -134,14 +134,10 @@ function run_test() {
             then
                 failure_message="${result}"
                 test_failed=true
-            else
-                result="$(echo "${result}" | tail -n 1)"
-
-                if ! [[ "${result}" == "${answer}" ]]
-                then
-                    failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
-                    test_failed=true
-                fi
+            elif ! [[ "${result}" == "${answer}" ]]
+            then
+                failure_message="Your answer was \`${result}\` but the answer should be \`${answer}\`"
+                test_failed=true
             fi
         fi
     fi
